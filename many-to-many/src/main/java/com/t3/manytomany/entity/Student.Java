@@ -8,4 +8,12 @@ import lombok.*;
 @Getter @Setter @NoArgsConstructor
 public class Student {
     
+    @Id
+    @GeneratedValue
+    private long id;
+
+    private String firstName;
+
+    private String lastName;
+
 }
