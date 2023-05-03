@@ -1,5 +1,8 @@
 package com.t3.manytomany.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,5 +18,21 @@ public class Student {
     private String firstName;
 
     private String lastName;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+        //nome da tabela gerada
+        name="students_groups_relation",
+        //adiciona uma coluna referenciando a chava primaria do lado dono
+        joinColumns = @JoinColumn(name="student_id", referencedColumnName = "id"),
+        //adiciona uma coluna referenciando a chava primaria do lado inverso
+        inverseJoinColumns = @JoinColumn(name="group_id", referencedColumnName = "id")
+    )
+    private Set<Group> groups = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", groups=" + groups + "]";
+    }
 
 }
