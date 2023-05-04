@@ -32,7 +32,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", groups=" + groups + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
+
+
 
 }

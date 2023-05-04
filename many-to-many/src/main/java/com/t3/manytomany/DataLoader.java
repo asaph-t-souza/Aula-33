@@ -19,9 +19,14 @@ public class DataLoader implements CommandLineRunner {
     private GroupRepository groupRepository;
 
     @Override
-    public void run(String... args) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'run'");
+    public void run(String... args) throws Exception {     
+        System.out.println("Início da execução");   
+
+        createNewStudent("João", "Silva");
+
+        fetchStudent(1L);
+
+        System.out.println("Fim da execução");   
     }
 
     public void createNewStudent(String firstName, String lastName){
@@ -38,9 +43,20 @@ public class DataLoader implements CommandLineRunner {
         student.getGroups().add(group1);
         student.getGroups().add(group2);
 
+        studentRepository.save(student);      
+        
+        System.out.println("Adicionado o Estudante: " + firstName + " " + lastName);
+    }
 
+    public void fetchStudent(long id){
+        Student student = studentRepository.findById(id).get();
 
+        System.out.println(student.toString());
+        System.out.println("participate in the groups: ");
 
+        student.getGroups().forEach((group) -> {
+            System.out.println(group.getName());
+        });
     }
     
 }
